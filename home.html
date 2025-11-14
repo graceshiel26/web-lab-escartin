@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Escartin Todo List</h1>
+        </header>
+        <main>
+
+            <form id="todoForm">
+                <input type="text" id="todoInput" placeholder="Add a new todo..." required>
+                <button type="submit">Add</button>
+            </form>
+
+
+            <ul id="todoList">
+
+            </ul>
+        </main>
+    </div>
+
+    <script>
+        const form = document.getElementById('todoForm');
+        const input = document.getElementById('todoInput');
+        const todoList = document.getElementById('todoList');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const todoText = input.value.trim();
+            if (todoText) {
+                addTodo(todoText);
+                input.value = '';
+            }
+        });
+
+        function addTodo(todoText) {
+            const li = document.createElement('li');
+            li.classList.add('todo-item');
+            li.innerHTML = `
+                <span class="todo-text">${todoText}</span>
+                <button class="delete-btn">Delete</button>
+            `;
+            todoList.appendChild(li);
+
+            const deleteButton = li.querySelector('.delete-btn');
+            deleteButton.addEventListener('click', function() {
+                li.remove();
+            });
+        }
+    </script>
+</body>
+
+</html>
